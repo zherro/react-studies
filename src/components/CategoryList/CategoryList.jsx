@@ -7,6 +7,7 @@ class CategoryList extends Component {
             console.log("addCategory")
             let valorCategoria = e.target.value;
             this.props.addCategory(valorCategoria);
+            e.target.value = "";
         }
     }
     render() {

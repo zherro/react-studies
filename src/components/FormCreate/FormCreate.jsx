@@ -7,6 +7,12 @@ class FormCreate extends Component {
         super(props);
         this.title = "";
         this.text = "";
+        this.category = "Sem categoria";
+    }
+
+    _handleChangeCategory(event) {
+        event.stopPropagation();
+        this.category = event.target.value;
     }
 
     _handleModfyTitle(event) {
@@ -23,12 +29,20 @@ class FormCreate extends Component {
     _createNote(event) {
         event.preventDefault();
         event.stopPropagation();
-        this.props.createNote(this.title, this.text);
+        this.props.createNote(this.title, this.text, this.category);
     }
 
     render() {
         return (
             <form className="form-cadastro" onSubmit={this._createNote.bind(this)}>
+                <select 
+                    onChange={this._handleChangeCategory.bind(this)}
+                    className="form-cadastro_input">
+                    <option>No category</option>
+                    {this.props.categories.map((category, index) => {
+                        return <option id={index} >{category}</option>
+                    })}
+                </select>
                 <input 
                     type="text" placeholder="Title" 
                     className="form-cadastro_input" 

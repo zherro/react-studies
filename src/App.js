@@ -22,8 +22,8 @@ class App extends Component {
   }
 
 
-  createNote(title, text) {
-    let newNote = {title, text};
+  createNote(title, text, category) {
+    let newNote = {title, text, category};
     let newNoteList = [...this.state.notes,newNote]
     let newState = {
       notes: newNoteList
@@ -40,7 +40,9 @@ class App extends Component {
   render() {
     return (
       <section className="conteudo">
-        <FormCreate createNote={this.createNote.bind(this)} />
+        <FormCreate 
+          categories={this.state.categoryList}
+          createNote={this.createNote.bind(this)} />
         <main className="conteudo-principal">
           <CategoryList 
             addCategory={this.addCategory.bind(this)}

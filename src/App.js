@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import NoteList from "./components/NoteList";
 import FormCreate from "./components/FormCreate";
 import "./assets/app.css";
+import CategoryList from './components/CategoryList/CategoryList';
 
 class App extends Component {
 
@@ -9,9 +10,17 @@ class App extends Component {
     super();
 
     this.state = {
-      notes: []
+      notes: [],
+      categoryList: ["Work", "Sports"],
     };
   }
+
+  addCategory(category) {
+    let newCatList = [...this.state.categoryList,category];
+    let newState = {...this.state, categoryList:newCatList};
+    this.setState(newState)
+  }
+
 
   createNote(title, text) {
     let newNote = {title, text};
@@ -32,10 +41,16 @@ class App extends Component {
     return (
       <section className="conteudo">
         <FormCreate createNote={this.createNote.bind(this)} />
-        <NoteList 
-          notes={this.state.notes} 
-          deleteNote={this.deleteNote.bind(this)}
+        <main className="conteudo-principal">
+          <CategoryList 
+            addCategory={this.addCategory.bind(this)}
+            categories={this.state.categoryList}
           />
+          <NoteList 
+            notes={this.state.notes} 
+            deleteNote={this.deleteNote.bind(this)}
+            />
+        </main>
       </section>
     );
   }

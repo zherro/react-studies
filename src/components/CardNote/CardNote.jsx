@@ -14,7 +14,7 @@ class CardNote extends Component {
             <section className="card-nota">
                 <header className="card-nota_cabecalho">
                     <h3 className="card-nota_titulo">{this.props.title}</h3>
-                    <img src={deleteIcon} onClick={this.delete.bind(this)} />
+                    <img alt="" src={deleteIcon} onClick={this.delete.bind(this)} />
                 </header>
                 <h4>{this.props.category}</h4>
                 <p className="card-nota_texto">{this.props.text}</p>

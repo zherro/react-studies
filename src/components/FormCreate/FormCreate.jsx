@@ -8,6 +8,15 @@ class FormCreate extends Component {
         this.title = "";
         this.text = "";
         this.category = "Sem categoria";
+        this.state = {categories: []};
+    }
+
+    componentDidMount() {
+        this.props.categories.subscribe(this._newCategories.bind(this));
+    }
+
+    _newCategories(categories) {
+        this.setState({...this.state, categories});
     }
 
     _handleChangeCategory(event) {
@@ -40,7 +49,7 @@ class FormCreate extends Component {
                     className="form-cadastro_input">
                     <option>No category</option>
                     {this.props.categories.categories.map((category, index) => {
-                        return <option id={index} >{category}</option>
+                        return <option key={index} >{category}</option>
                     })}
                 </select>
                 <input 

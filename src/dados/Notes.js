@@ -7,10 +7,12 @@ export default class Notes {
     addNote(title, text, category) {
         let newNote = new Note(title, text, category);
         this.notes.push(newNote);
+        this.notify();
     }
 
     deleteNote(index) {
         this.notes.splice(index, 1);
+        this.notify();
     }
 
     subscribe(func) {
@@ -20,7 +22,7 @@ export default class Notes {
     notify() {
         this._subscribers.forEach(
             func => {
-                func(this.categories);
+                func(this.notes);
             });
     }
 }

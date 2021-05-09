@@ -4,6 +4,10 @@ export default class Categories {
         this._subscribers = [];
     }
 
+    unsubscribe(func) {
+        this._subscribers = this._subscribers.filter( f => f !== func);
+    }
+
     subscribe(func) {
         this._subscribers.push(func);
     }

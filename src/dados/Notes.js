@@ -15,6 +15,10 @@ export default class Notes {
         this.notify();
     }
 
+    unsubscribe(func) {
+        this._subscribers = this._subscribers.filter( f => f !== func);
+    }
+
     subscribe(func) {
         this._subscribers.push(func);
     }

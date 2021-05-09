@@ -3,54 +3,31 @@ import NoteList from "./components/NoteList";
 import FormCreate from "./components/FormCreate";
 import "./assets/app.css";
 import CategoryList from './components/CategoryList/CategoryList';
+import Categories from './dados/Categories';
+import Notes from './dados/Notes';
 
 class App extends Component {
 
   constructor() {
     super();
-
-    this.state = {
-      notes: [],
-      categoryList: ["Work", "Sports"],
-    };
-  }
-
-  addCategory(category) {
-    let newCatList = [...this.state.categoryList,category];
-    let newState = {...this.state, categoryList:newCatList};
-    this.setState(newState)
-  }
-
-
-  createNote(title, text, category) {
-    let newNote = {title, text, category};
-    let newNoteList = [...this.state.notes,newNote]
-    let newState = {
-      notes: newNoteList
-    }
-    this.setState(newState)
-  }
-
-  deleteNote(index) {
-    let noteList = this.state.notes;
-    noteList.splice(index, 1);
-    this.setState({notes:noteList});
+    this.categories = new Categories();
+    this.notes = new Notes();
   }
 
   render() {
     return (
       <section className="conteudo">
         <FormCreate 
-          categories={this.state.categoryList}
-          createNote={this.createNote.bind(this)} />
+          categories={this.categories}
+          createNote={this.notes.addNote.bind(this.notes)} />
         <main className="conteudo-principal">
           <CategoryList 
-            addCategory={this.addCategory.bind(this)}
-            categories={this.state.categoryList}
+            addCategory={this.categories.addCategory.bind(this.categories)}
+            categories={this.categories}
           />
           <NoteList 
-            notes={this.state.notes} 
-            deleteNote={this.deleteNote.bind(this)}
+            notes={this.notes.notes} 
+            deleteNote={this.notes.deleteNote.bind(this.notes)}
             />
         </main>
       </section>

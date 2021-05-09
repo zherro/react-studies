@@ -39,7 +39,7 @@ class FormCreate extends Component {
                     onChange={this._handleChangeCategory.bind(this)}
                     className="form-cadastro_input">
                     <option>No category</option>
-                    {this.props.categories.map((category, index) => {
+                    {this.props.categories.categories.map((category, index) => {
                         return <option id={index} >{category}</option>
                     })}
                 </select>
